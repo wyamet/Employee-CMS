@@ -156,13 +156,13 @@ const init = async () => {
           console.log(error);
         }
         break;
-      case "exit":
+      case "end":
+        console.log("App has stopped");
         isRunning = false;
-        await db.closeConnection();
-        process.exit(0);
-      default:
-        console.log("Invalid option selected");
+        db.endConnection();
         break;
+      default:
+        console.log("Invalid option");
     }
   }
 };
