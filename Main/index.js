@@ -136,22 +136,37 @@ const init = async () => {
         break;
       case "updateEmployeeRole":
         try {
-          const employeeData = await prompt([
+          const [roles, employees] = await Promise.all([
+            db.viewAllRoles(),
+            db.viewAllEmployees(),
+          ]);
+
+          const employeeToUpdate = await prompt([
             {
               type: "list",
               name: "id",
               message: "Which employee's role do you want to update?",
-              choices: await db.viewAllEmployees(),
+              choices: employees.map(({ id, first_name, last_name }) => ({
+                name: `${first_name} ${last_name}`,
+                value: id,
+              })),
             },
             {
               type: "list",
-              name: "roleId",
+              name: "role_id",
               message: "What is the employee's new role?",
-              choices: await db.viewAllRoles(),
+              choices: roles.map(({ id, title }) => ({
+                name: title,
+                value: id,
+              })),
             },
           ]);
-          await db.updateEmployeeRole(employeeData.id, employeeData.roleId);
-          console.log(`Employee role updated`);
+
+          await db.updateEmployeeRole(
+            employeeToUpdate.id,
+            employeeToUpdate.role_id
+          );
+          console.log("Employee role updated successfully");
         } catch (error) {
           console.log(error);
         }
