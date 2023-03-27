@@ -16,9 +16,9 @@ The app was built from scratch, leveraging the power of Node.js, a popular serve
 
 To use the app, users will need to have Node.js and MySQL installed on their machines. The Employee Tracker app is easy to use and has a simple user interface, making it a great tool for businesses of all sizes.
 
-## Table of Contents (Optional)
+## Table of Contents 
 
-If your README is long, add a table of contents to make it easy for users to find what they need.
+
 
 - [Installation](#installation)
 - [Usage](#usage)
